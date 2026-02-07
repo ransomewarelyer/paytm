@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Payment History</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f7fa;
+            color: #000;
+        }
+
+        .header {
+            background: #fff;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-icon {
+            width: 24px;
+            height: 24px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19 12H5M12 19l-7-7 7-7'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            cursor: pointer;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .month-section {
+            background: #fff;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .month-header {
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f5f7fa;
+            /* Light grey background for header based on screenshot? verify. Actually looks white in screenshot but separated. */
+            background: #fff;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .month-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .month-total {
+            text-align: right;
+            font-size: 12px;
+            color: #888;
+        }
+
+        .month-amount {
+            font-size: 16px;
+            font-weight: 700;
+            color: #000;
+        }
+
+        .refresh-text {
+            color: #00baf2;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .transaction-item {
+            display: flex;
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            gap: 15px;
+        }
+
+        .txn-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid #eee;
+            /* Placeholder for AMTS logo */
+            background-image: url('./assets/amts.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .txn-details {
+            flex: 1;
+        }
+
+        .txn-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 4px;
+        }
+
+        .txn-time {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .txn-badge {
+            display: inline-flex;
+            align-items: center;
+            background: #e6fcf5;
+            /* Light green bg */
+            color: #00b970;
+            /* Green text */
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            gap: 4px;
+        }
+
+        .txn-badge::before {
+            content: "📄";
+            /* Bill Icon placeholder */
+            font-size: 10px;
+        }
+
+        .txn-amount-col {
+            text-align: right;
+        }
+
+        .txn-amount {
+            font-size: 16px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 4px;
+        }
+
+        .txn-source {
+            font-size: 12px;
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 4px;
+        }
+
+        .source-icon {
+            font-weight: 700;
+            color: #c00;
+            /* Axis Bank red? Or just dark */
+            /* Screenshot shows an infinity loop or 'U' symbol */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="back-icon" onclick="window.location.href='index.html'"></div>
+        <div class="header-title">Payment History</div>
+    </div>
+
+    <div id="history-container">
+        <!-- Dynamic Content Will Load Here -->
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('history-container');
+            const history = JSON.parse(localStorage.getItem('transactionHistory') || '[]');
+
+            // Group by Month
+            const grouped = {};
+
+            history.forEach(txn => {
+                const date = new Date(txn.date);
+                const monthYear = date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }); // "January 2026"
+
+                if (!grouped[monthYear]) {
+                    grouped[monthYear] = {
+                        total: 0,
+                        transactions: []
+                    };
+                }
+
+                grouped[monthYear].transactions.push(txn);
+                grouped[monthYear].total += txn.amount || 0;
+            });
+
+            // Render
+            // Sort months? Date keys might need sorting if out of order, but history is unshifted so likely in order.
+
+            Object.keys(grouped).forEach(month => {
+                const group = grouped[month];
+
+                // Month Section
+                const section = document.createElement('div');
+                section.className = 'month-section';
+
+                // Header
+                let headerHTML = `
+                    <div class="month-header">
+                        <div class="month-name">${month}</div>
+                        <div class="month-total">
+                            <div>Total Spent</div>
+                            <div class="month-amount">₹${group.total}</div>
+                        </div>
+                    </div>
+                `;
+
+                // Transactions
+                let txnsHTML = '';
+                group.transactions.forEach(txn => {
+                    const date = new Date(txn.date);
+                    // Format: "Paid on 7 Feb, 7:53 AM"
+                    const day = date.getDate();
+                    const monthShort = date.toLocaleDateString('en-US', { month: 'short' });
+                    let hours = date.getHours();
+                    const ampm = hours >= 12 ? 'PM' : 'AM';
+                    hours = hours % 12 || 12;
+                    const minutes = String(date.getMinutes()).padStart(2, '0');
+
+                    const timeStr = `Paid on ${day} ${monthShort}, ${hours}:${minutes} ${ampm}`;
+
+                    txnsHTML += `
+                        <div class="transaction-item">
+                            <div class="txn-logo" style="background-image: url('${txn.logo || './assets/amts.png'}')"></div>
+                            <div class="txn-details">
+                                <div class="txn-title">${txn.title}</div>
+                                <div class="txn-time">${timeStr}</div>
+                                <div class="txn-badge">${txn.status}</div>
+                            </div>
+                            <div class="txn-amount-col">
+                                <div class="txn-amount">- ₹${txn.amount}</div>
+                                <div class="txn-source">From <span style="font-weight: bold;">Axis Bank</span></div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                section.innerHTML = headerHTML + txnsHTML;
+                container.appendChild(section);
+            });
+
+            if (history.length === 0) {
+                container.innerHTML = '<div style="padding:20px; text-align:center; color:#888;">No transactions found.</div>';
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Paytm</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f7fa;
+            color: #000;
+            padding-bottom: 100px;
+            /* Space for bottom scan button */
+        }
+
+        /* Header */
+        .home-header {
+            background: #fff;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.02);
+        }
+
+        .profile-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-pic {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        /* Sections */
+        .section-card {
+            background: #fff;
+            margin: 15px;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+        }
+
+        .section-header {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #000;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px 0;
+        }
+
+        .grid-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .grid-icon {
+            margin-bottom: 8px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Specific Icon Colors - Paytm Blue mostly */
+        .grid-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: #002e6e;
+            stroke-width: 1.5;
+        }
+
+        .grid-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: #333;
+            line-height: 1.3;
+        }
+
+        /* Pills Row */
+        .pills-row {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .pill {
+            flex: 1;
+            background: #f5f7fa;
+            padding: 10px 15px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #000;
+        }
+
+        /* Free Tools Cards */
+        .free-tools-row {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            padding-bottom: 5px;
+        }
+
+        .tool-card {
+            min-width: 100px;
+            flex: 1;
+            background: #eafaff;
+            /* Light Blue */
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 110px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-title {
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.3;
+            z-index: 2;
+        }
+
+        /* Floating Scan Button */
+        .scan-btn-float {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #002e6e 0%, #0050ac 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 20px rgba(0, 46, 110, 0.4);
+            cursor: pointer;
+            z-index: 2000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div class="home-header">
+        <div class="profile-container">
+            <div class="profile-pic">
+                <img src="./assets/1.png" alt="Profile">
+            </div>
+            <div
+                style="font-weight: 700; font-size: 18px; color: #002e6e; display: flex; align-items: center; gap: 2px;">
+                paytm<img src="./assets/icon.png" style="height: 14px; margin: 0 2px;">UPI
+            </div>
+        </div>
+
+        <div class="header-icons">
+            <img src="./assets/search.svg" class="icon">
+            <div style="position: relative;">
+                <img src="./assets/bell.svg" class="icon">
+                <div
+                    style="position: absolute; top: 0; right: 0; width: 8px; height: 8px; background: #00baf2; border-radius: 50%; border: 1px solid white;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Travel & Tickets -->
+    <div class="section-card">
+        <div class="section-header">Travel & Tickets</div>
+
+        <div class="grid-4">
+            <!-- Flight -->
+            <div class="grid-item">
+                <div class="grid-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M22 2L11 13" />
+                        <path d="M22 2l-7 20-4-9-9-4 20-7z" />
+                    </svg>
+                </div>
+                <div class="grid-label">Flight</div>
+            </div>
+            <!-- Train -->
+            <div class="grid-item">
+                <div class="grid-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect x="6" y="3" width="12" height="13" rx="2" />
+                        <path d="M9 21h6" />
+                        <path d="M8 21v-2" />
+                        <path d="M16 21v-2" />
+                        <path d="M9 3v8" />
+                        <path d="M15 3v8" />
+                    </svg>
+                </div>
+                <div class="grid-label">Train</div>
+            </div>
+            <!-- Bus (TARGET) -->
+            <div class="grid-item" onclick="window.location.href='select_pass.html'">
+                <div class="grid-icon">
+                    <!-- Bus Icon SVG - Replacing prev generic with this clean one -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M8 6v6" />
+                        <path d="M15 6v6" />
+                        <path d="M2 12h19.6" />
+                        <path
+                            d="M18 18h3s.5-1.7.8-2.8c.4-1.4.8-3.2.8-5.7 0-2-1-3.7-2.7-4.3L16.4 1 5 6H3c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h3" />
+                        <path d="M17 18h-8" />
+                        <path d="M7 18H5a2 2 0 0 1-2-2v-1" />
+                        <path d="M7 18v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-2" />
+                        <path d="M17 18v2a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-2" />
+                    </svg>
+                </div>
+                <div class="grid-label">Bus</div>
+            </div>
+            <!-- Hotels -->
+            <div class="grid-item">
+                <div class="grid-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M3 21h18" />
+                        <path d="M5 21V7" />
+                        <path d="M19 21V7" />
+                        <path d="M5 7a5 5 0 0 1 10 0v14" />
+                        <path d="M15 7h4" />
+                        <path d="M9 11v-4" />
+                        <path d="M9 15v-4" />
+                        <path d="M9 19v-4" />
+                    </svg>
+                </div>
+                <div class="grid-label">Hotels</div>
+            </div>
+        </div>
+
+        <div class="pills-row">
+            <div class="pill" style="background: #f0f6ff;" onclick="window.location.href='select_pass.html'">
+                <!-- Bus SVG for Pill -->
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#002e6e" stroke-width="2">
+                    <path d="M8 6v6" />
+                    <path d="M15 6v6" />
+                    <path d="M2 12h19.6" />
+                    <path
+                        d="M18 18h3s.5-1.7.8-2.8c.4-1.4.8-3.2.8-5.7 0-2-1-3.7-2.7-4.3L16.4 1 5 6H3c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h3" />
+                    <path d="M17 18h-8" />
+                    <path d="M7 18H5a2 2 0 0 1-2-2v-1" />
+                    <path d="M7 18v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-2" />
+                    <path d="M17 18v2a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-2" />
+                </svg>
+                AMTS/BRTS Bus
+            </div>
+            <div class="pill">
+                <!-- Plane SVG for Pill -->
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#002e6e" stroke-width="2">
+                    <path d="M22 2L11 13" />
+                    <path d="M22 2l-7 20-4-9-9-4 20-7z" />
+                </svg>
+                Track Flight Status
+            </div>
+        </div>
+    </div>
+
+    <!-- Financial Services -->
+    <div class="section-card">
+        <div class="section-header">Financial Services</div>
+        <div class="grid-4">
+            <!-- Loan -->
+            <div class="grid-item">
+                <div class="grid-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M12 2v20" />
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                    </svg>
+                </div>
+                <div class="grid-label">Loan</div>
+            </div>
+            <!-- Car Insurance -->
+            <div class="grid-item">
+                <div class="grid-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path
+                            d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.29-.71L17 7.29A1 1 0 0 0 16.29 7h-8.58a1 1 0 0 0-.71.29l-4.71 4.86a1 1 0 0 0-.29.7V16h3m10 0a2 2 0 1 1-2.83 2.83A2 2 0 0 1 19 16Zm-10 0a2 2 0 1 1-2.83 2.83A2 2 0 0 1 9 16Z" />
+                    </svg>
+                </div>
+                <div class="grid-label">Car<br>Insurance</div>
+            </div>
+            <!-- Save in Gold -->
+            <div class="grid-item">
+                <div class="grid-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8" />
+                        <path d="M12 18V6" />
+                    </svg>
+                </div>
+                <div class="grid-label">Save in<br>Gold</div>
+            </div>
+            <!-- Stocks -->
+            <div class="grid-item">
+                <div class="grid-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M22 7L13.5 15.5L8.5 10.5L2 17" />
+                        <path d="M16 7h6v6" />
+                    </svg>
+                </div>
+                <div class="grid-label">Stocks</div>
+            </div>
+        </div>
+        <div class="pills-row">
+            <div class="pill" onclick="window.location.href='history.html'">
+                <img src="./assets/icon.png" style="height: 12px;"> Balance & History
+            </div>
+            <div class="pill">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#002e6e" stroke-width="2">
+                    <path d="M12 2v20" />
+                    <path d="M2 12h20L12 2 2 12z" />
+                </svg>
+                SIP at ₹21/day
+            </div>
+        </div>
+    </div>
+
+    <!-- Free Tools -->
+    <div class="section-card">
+        <div class="section-header">Free Tools</div>
+        <div class="free-tools-row">
+            <!-- Credit Score -->
+            <div class="tool-card" style="background: #e3fcec;">
+                <div class="tool-title">Check Your<br>Credit Score</div>
+                <div style="margin-top: auto; display:flex; justify-content:center;">
+                    <!-- Simple gauge visual -->
+                    <div
+                        style="width: 40px; height: 20px; border-radius: 20px 20px 0 0; background: conic-gradient(from 180deg, red, yellow, green); opacity:0.7;">
+                    </div>
+                </div>
+                <div
+                    style="font-size: 10px; text-align:center; font-weight:700; color:#00b970; background:white; position:absolute; bottom:10px; right:10px; padding:2px 5px; border-radius:4px;">
+                    820</div>
+            </div>
+
+            <!-- EMI Offers -->
+            <div class="tool-card" style="background: #ffe8eb;">
+                <div class="tool-title">EMI Offers<br>Near You</div>
+                <div style="font-size: 14px; margin-top: auto; font-weight: 800; color: #d00;">%</div>
+            </div>
+
+            <!-- Track Spends -->
+            <div class="tool-card" style="background: #e3fcec;">
+                <div class="tool-title">Track Your<br>Spends</div>
+                <div style="margin-top: auto; font-size: 10px;">
+                    <div
+                        style="background:white; padding:2px; margin-bottom:2px; border-radius:2px; display:flex; align-items:center; gap:2px;">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 8v8" />
+                            <path d="M8 12h8" />
+                        </svg>
+                        ₹10,200
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scan Button -->
+    <div class="scan-btn-float">
+        <img src="./assets/scan-qr-w.svg" style="width: 20px; filter: brightness(100);">
+        Scan QR
+    </div>
+
+</body>
+
+</html>

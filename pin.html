@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Enter PIN</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        let pin = "";
+
+        function addDigit(digit) {
+            if (pin.length < 4) {
+                pin += digit;
+                updateDots();
+            }
+            if (pin.length === 4) {
+                // Auto submit check
+                setTimeout(() => {
+                    if (pin === "1234") {
+                        // Success
+                        // Save timestamp and redirect
+                        // Save timestamp and redirect
+                        const now = new Date();
+                        localStorage.setItem('purchaseTime', now.toISOString());
+
+                        // Add to Payment History
+                        const newTransaction = {
+                            id: 'txn_' + now.getTime(),
+                            date: now.toISOString(),
+                            amount: 45,
+                            title: 'AMTS - Daily Manpasand Pass',
+                            status: 'Bill Payments',
+                            source: 'Axis Bank', // User requested Axis Bank
+                            logo: './assets/amts.png'
+                        };
+
+                        let history = JSON.parse(localStorage.getItem('transactionHistory') || '[]');
+                        history.unshift(newTransaction); // Add to top
+                        localStorage.setItem('transactionHistory', JSON.stringify(history));
+
+                        window.location.href = 'receipt.html';
+                    } else {
+                        alert("Incorrect PIN. Try 1234.");
+                        pin = "";
+                        updateDots();
+                    }
+                }, 300);
+            }
+        }
+
+        function deleteDigit() {
+            pin = pin.slice(0, -1);
+            updateDots();
+        }
+
+        function updateDots() {
+            const dots = document.querySelectorAll('.pin-dot');
+            dots.forEach((dot, index) => {
+                if (index < pin.length) {
+                    dot.classList.add('filled');
+                } else {
+                    dot.classList.remove('filled');
+                }
+            });
+        }
+    </script>
+</head>
+
+<body style="background: #fff;">
+
+    <!-- Top Header (UPI Standard) -->
+    <div
+        style="background: #002e6e; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center;">
+        <div style="font-weight: 600; font-size: 16px;">Paytm Payment</div>
+        <div style="font-size: 12px; opacity: 0.8;">INDUSIND BANK</div> <!-- Generic or believable bank -->
+    </div>
+
+    <!-- Main Content -->
+    <div class="pin-container" style="margin-top: 30px;">
+
+        <div style="margin-bottom: 30px; text-align: center;">
+            <div
+                style="font-size: 13px; font-weight: 500; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">
+                To</div>
+            <div style="font-size: 20px; font-weight: 700; margin-top: 5px; color: #000;">AMTS Travel</div>
+            <div style="font-size: 14px; color: #666; margin-top: 2px;">amts.travel@paytm</div>
+            <div style="font-size: 32px; font-weight: 700; margin-top: 20px; color: #000;">₹45</div>
+        </div>
+
+        <div
+            style="background: #f9f9f9; padding: 15px; width: 100%; text-align: center; border-top: 1px solid #eee; border-bottom: 1px solid #eee;">
+            <div class="pin-instruction" style="font-weight: 600; color: #444; margin-bottom: 15px;">ENTER 4-DIGIT UPI
+                PIN</div>
+            <div class="pin-dots" style="justify-content: center; margin: 0;">
+                <div class="pin-dot"></div>
+                <div class="pin-dot"></div>
+                <div class="pin-dot"></div>
+                <div class="pin-dot"></div>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <img src="./assets/paytm_upi_logo.png" style="height: 16px;"> <!-- Using our mocked logo or just text -->
+            <span style="font-size: 12px; color: #888;">Payments verified by UPI</span>
+        </div>
+
+    </div>
+
+    <!-- Numeric Keypad (Fixed Bottom) -->
+    <div
+        style="position: fixed; bottom: 0; width: 100%; background: #fff; padding-bottom: 15px; box-shadow: 0 -2px 20px rgba(0,0,0,0.05);">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); text-align: center;">
+            <div class="key" onclick="addDigit('1')">1</div>
+            <div class="key" onclick="addDigit('2')">2</div>
+            <div class="key" onclick="addDigit('3')">3</div>
+
+            <div class="key" onclick="addDigit('4')">4</div>
+            <div class="key" onclick="addDigit('5')">5</div>
+            <div class="key" onclick="addDigit('6')">6</div>
+
+            <div class="key" onclick="addDigit('7')">7</div>
+            <div class="key" onclick="addDigit('8')">8</div>
+            <div class="key" onclick="addDigit('9')">9</div>
+
+            <div class="key" style="background: transparent;"></div>
+            <div class="key" onclick="addDigit('0')">0</div>
+            <div class="key" onclick="deleteDigit()"
+                style="display: flex; align-items: center; justify-content: center;">
+                <img src="./assets/back.svg" style="width: 24px; filter: contrast(0%); opacity: 0.6;">
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

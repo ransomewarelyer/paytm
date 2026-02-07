@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Paytm - Select Pass</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="shortcut icon" type="image/x-icon" href="./assets/icon.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="header-white">
+        <div class="nav-white">
+            <div class="back-icon" onclick="window.location.href='index.html'"></div>
+            <div class="help-text">Help</div>
+        </div>
+    </header>
+
+    <div class="main-content">
+
+        <!-- Active Pass State (Hidden by default) -->
+        <div id="active-pass-container" style="display: none; padding: 15px; text-align: center;">
+            <!-- Header with Date/Time Mock -->
+            <div
+                style="background: #eafaff; border: 1px solid #00baf2; border-radius: 12px; padding: 15px; margin-bottom: 25px;">
+                <div style="font-size: 14px; color: #002e6e; font-weight: 600; margin-bottom: 5px;">Manpasand Pass
+                    Active</div>
+                <div style="font-size: 18px; font-weight: 700; color: #000;" id="active-header-date">Today, 10:00 AM
+                </div>
+                <div style="font-size: 12px; color: #666; margin-top: 5px;">Valid for today</div>
+            </div>
+
+            <!-- QR Code Section -->
+            <div onclick="window.location.href='pass.html'" style="margin-bottom: 30px; cursor: pointer;">
+                <!-- QR Placeholder -->
+                <div
+                    style="width: 180px; height: 180px; margin: 0 auto; background: #fff; padding: 10px; border: 2px dashed #ccc; display: flex; align-items: center; justify-content: center;">
+                    <img src="https://amtss.vercel.app/assets/qr.png" style="width: 100%; opacity: 0.8;" alt="QR Code">
+                    <!-- Note: chart.png is a guess, using scan-qr-p.svg might be better if chart doesn't exist, but prompt implied generic QR -->
+                </div>
+                <div style="font-size: 13px; color: #888; margin-top: 10px;">Tap to view details</div>
+            </div>
+
+            <!-- View Pass Button -->
+            <button onclick="window.location.href='pass.html'"
+                style="background: #21c17a; color: white; border: none; padding: 15px 40px; border-radius: 30px; font-size: 16px; font-weight: 700; box-shadow: 0 4px 15px rgba(33, 193, 122, 0.3);">
+                Click here to view pass
+            </button>
+        </div>
+
+        <!-- Default Pass Selection (Visible by default) -->
+        <div id="pass-selection-container">
+            <div class="pass-header">
+                <div class="bus-icon-circle">
+                    <img src="./assets/amts.png" alt="Bus">
+                </div>
+                <div class="pass-title-container">
+                    <h1>Daily Manpasand Pass</h1>
+                    <p>Unlimited travel on all AMTS buses today</p>
+                </div>
+            </div>
+
+            <h2 class="section-title">Select Pass Type</h2>
+
+            <div class="pass-options">
+                <!-- Adult Option -->
+                <label class="pass-card">
+                    <div class="radio-container">
+                        <input type="radio" name="passType" value="45" checked>
+                        <span class="checkmark"></span>
+                    </div>
+                    <div class="pass-info">
+                        <div class="info-row type">
+                            <span>Type</span>
+                            <span>Valid for</span>
+                            <span>Price</span>
+                        </div>
+                        <div class="info-row value">
+                            <span>Adult</span>
+                            <span>1 Day</span>
+                            <span>₹45</span>
+                        </div>
+                    </div>
+                </label>
+
+                <!-- Ladies Option -->
+                <label class="pass-card">
+                    <div class="radio-container">
+                        <input type="radio" name="passType" value="20">
+                        <span class="checkmark"></span>
+                    </div>
+                    <div class="pass-info">
+                        <div class="info-row type">
+                            <span>Type</span>
+                            <span>Valid for</span>
+                            <span>Price</span>
+                        </div>
+                        <div class="info-row value">
+                            <span>Ladies</span>
+                            <span>1 Day</span>
+                            <span>₹20</span>
+                        </div>
+                    </div>
+                </label>
+
+                <!-- Child Option -->
+                <label class="pass-card">
+                    <div class="radio-container">
+                        <input type="radio" name="passType" value="10">
+                        <span class="checkmark"></span>
+                    </div>
+                    <div class="pass-info">
+                        <div class="info-row type">
+                            <span>Type</span>
+                            <span>Valid for</span>
+                            <span>Price</span>
+                        </div>
+                        <div class="info-row value">
+                            <span>Child</span>
+                            <span>1 Day</span>
+                            <span class="strike">₹10</span>
+                        </div>
+                    </div>
+                    <div class="sub-text">(below 12 years of age)</div>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Bar (Dynamic) -->
+    <div class="bottom-bar" id="bottom-bar">
+        <button class="proceed-btn" onclick="window.location.href='pin.html'">Proceed to Pay</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const activeContainer = document.getElementById('active-pass-container');
+            const selectionContainer = document.getElementById('pass-selection-container');
+            const bottomBar = document.getElementById('bottom-bar');
+
+            const storedTime = localStorage.getItem('purchaseTime');
+            let hasValidTicket = false;
+
+            if (storedTime) {
+                const purchaseDate = new Date(storedTime);
+                const now = new Date();
+
+                // Validate if ticket is from TODAY (Same Day, Month, Year)
+                const isSameDay = purchaseDate.getDate() === now.getDate() &&
+                    purchaseDate.getMonth() === now.getMonth() &&
+                    purchaseDate.getFullYear() === now.getFullYear();
+
+                // Also could validate 14 hour timer, but "Same Day" is the prompt's request ("purchase once a ticket... on every day")
+                if (isSameDay) {
+                    hasValidTicket = true;
+
+                    // Update Active View UI
+                    const options = { weekday: 'short', day: 'numeric', month: 'short', hour: 'numeric', minute: 'numeric', hour12: true };
+                    // User requested: "date and time, day, in a box... but never show when person purchased"
+                    // Conflict resolution: Show CURRENT time or generic "Valid for 18 Nov" text?
+                    // "never show when person purchased" usually means don't show the static purchase timestamp.
+                    // Let's show "Valid for [Date]" + Current Time to make it feel "Live".
+
+                    const dateStr = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+                    const dayStr = now.toLocaleDateString('en-US', { weekday: 'long' });
+
+                    document.getElementById('active-header-date').innerHTML = `${dayStr}, ${dateStr}<br><span style="font-size:14px; font-weight:500;">Valid till 14 hours from purchase</span>`;
+                }
+            }
+
+            if (hasValidTicket) {
+                // Show Active State
+                activeContainer.style.display = 'block';
+                selectionContainer.style.display = 'none';
+                bottomBar.style.display = 'none'; // Hide Proceed Button
+            } else {
+                // Show Default State
+                activeContainer.style.display = 'none';
+                selectionContainer.style.display = 'block';
+                bottomBar.style.display = 'block';
+            }
+        });
+    </script>
+
+</body>
+
+</html>

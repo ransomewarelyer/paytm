@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Paytm - Select City</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body style="background: #fff;">
+    <header style="padding: 15px; display: flex; align-items: center;">
+        <div style="width: 24px; height: 24px; margin-right: 15px; cursor: pointer;" onclick="history.back()">
+            <img src="./assets/back.svg" style="width: 100%;">
+        </div>
+    </header>
+
+    <div style="padding: 0 20px;">
+        <h1 style="font-size: 26px; font-weight: 700; margin-bottom: 25px; color: #000;">Select your City</h1>
+
+        <div class="city-list">
+            <div class="city-item" onclick="window.location.href='select_pass.html'">
+                <div class="city-icon">
+                    <!-- Ahmedabad Icon - Building outline -->
+                    <img src="./assets/ahmedabad.svg" alt="Ahd">
+                </div>
+                <div class="city-name" style="font-weight: 400; font-size: 17px;">Ahmedabad</div>
+            </div>
+
+            <div class="city-item">
+                <div class="city-icon">
+                    <img src="./assets/goa.svg" alt="Goa">
+                </div>
+                <div class="city-name" style="font-weight: 400; font-size: 17px;">Goa</div>
+            </div>
+
+            <div class="city-item">
+                <div class="city-icon">
+                    <img src="./assets/nashik.svg" alt="Nashik">
+                </div>
+                <div class="city-name" style="font-weight: 400; font-size: 17px;">Nashik</div>
+            </div>
+
+            <div class="city-item">
+                <div class="city-icon">
+                    <img src="./assets/surat.svg" alt="Surat">
+                </div>
+                <div class="city-name" style="font-weight: 400; font-size: 17px;">Surat <span class="badge-new"
+                        style="background: #00b970; font-weight: 600; font-size: 11px; padding: 3px 8px; margin-left:12px;">Newly
+                        Added</span></div>
+            </div>
+
+            <div class="city-item">
+                <div class="city-icon">
+                    <img src="./assets/mumbai.svg" alt="Mum">
+                </div>
+                <div class="city-name" style="font-weight: 400; font-size: 17px;">Mumbai <span class="badge-new"
+                        style="background: #00b970; font-weight: 600; font-size: 11px; padding: 3px 8px; margin-left:12px;">Newly
+                        Added</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Promo Banner Bottom (Matches screenshot green button) -->
+    <div
+        style="margin: 30px 20px; background: #eafaff; padding: 20px; border-radius: 16px; display: flex; align-items: center; justify-content: space-between;">
+        <div style="flex: 1;">
+            <div style="color: #00baf2; font-size: 13px; font-weight: 700; margin-bottom: 5px;">Travel Contactless</div>
+            <div style="font-size: 17px; font-weight: 700; color: #002e6e; line-height: 1.3;">Buy Local Bus
+                Tickets<br>on Paytm</div>
+            <button
+                style="margin-top: 15px; background: #21c17a; color: white; border: none; padding: 10px 24px; border-radius: 20px; font-weight: 700; font-size: 14px;">Buy
+                Now</button>
+        </div>
+        <img src="./assets/bus_illustration.png" style="width: 100px; margin-left: 10px;">
+    </div>
+
+</body>
+
+</html>

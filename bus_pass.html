@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Paytm</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="./assets/icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --blue1: #ddf6ff;
+            --blue2: #21abd9;
+            --blue3: #022a72;
+        }
+
+        body {
+            margin: 15px;
+            font-family: "Inter", Helvetica, Arial, sans-serif;
+            display: flex;
+            gap: 30px;
+            flex-direction: column;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Using Remote Assets for Exact Match */
+        .back {
+            width: 15px;
+            height: 20px;
+            margin: auto 0;
+            background-image: url('https://amtss.vercel.app/assets/back.svg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100%;
+            cursor: pointer;
+        }
+
+        .tkt-div {
+            display: flex;
+            gap: 18px;
+        }
+
+        .tkt-logo {
+            width: 46px;
+            height: 46px;
+            margin: auto 0;
+            background-image: url('https://amtss.vercel.app/assets/tkt.svg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100%;
+        }
+
+        .tkt-txt {
+            font-size: 15px;
+            margin: auto 0;
+            font-weight: bold;
+            color: black;
+        }
+
+        .help {
+            font-size: 14px;
+            margin: auto 0;
+            font-weight: bold;
+            color: var(--blue2);
+        }
+
+        .qr-div {
+            display: flex;
+            justify-content: center;
+        }
+
+        .qr {
+            width: 250px;
+            height: 250px;
+            margin: auto 0;
+            margin-top: 10px;
+            /* Using the static QR from vercel app as base, or keep API if user wants dynamic? 
+               User said "implement the exact same". 
+               The reference has specific QR pattern. 
+               Let's use the reference image. IDK if it validates. 
+            */
+            background-image: url('https://amtss.vercel.app/assets/qr.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100%;
+        }
+
+        .instructions {
+            display: flex;
+            justify-content: center;
+            margin-top: 4%;
+            margin-bottom: 4%;
+        }
+
+        .instruct-1 {
+            font-size: 14px;
+            font-weight: 500;
+            /* Medium maps to 500 */
+            color: black;
+        }
+
+        .time {
+            background-image: url('https://amtss.vercel.app/assets/time.png');
+            width: 14px;
+            height: 14px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100%;
+        }
+
+        .instruct-2 {
+            font-size: 13px;
+            /* margin: auto 0; */
+            font-weight: 500;
+            color: black;
+
+        }
+
+        .instructions-1 {
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            align-items: center;
+            margin-top: 5%;
+            gap: 8px;
+            margin-bottom: 4%;
+        }
+
+        .payment {
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+            padding-top: 25px;
+            border: 2px solid #d9d9d9;
+            margin-top: 30px;
+            border-radius: 5px;
+            gap: 30px;
+        }
+
+        .heading-payment {
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        .tickets {
+            display: flex;
+            font-size: 14px;
+            font-weight: 500;
+            justify-content: space-between;
+        }
+
+        .final-payment-div {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .operator-title {
+            font-size: 13.5px;
+            color: #b0b0b0;
+            font-weight: 400;
+        }
+
+        .multi-price {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="nav">
+
+            <div class="tkt-div">
+                <div class="back" onclick="window.location.href='pass.html'"></div>
+                <div class="tkt-logo"></div>
+                <div class="tkt-txt">Bus Pass</div>
+            </div>
+            <div class="help">Help</div>
+        </div>
+    </header>
+    <section>
+        <div class="instructions">
+            <span class="instruct-1">Scan this QR at Entry & Exit Points</span>
+        </div>
+        <div class="qr-div">
+            <div class="qr"></div>
+        </div>
+        <div class="instructions-1">
+            <div class="time"></div>
+            <span class="instruct-2">Valid till
+            </span>
+            <span class="instruct-2">
+                <b>
+                    <div class="date" style="display:inline;"><span id="date"></span> <span id="month"></span> <span
+                            id="year"></span>, 11:<span>59</span> PM</div>
+                </b>
+            </span>
+        </div>
+
+        <div class="payment">
+            <div class="heading-payment">Ticket Details</div>
+            <div class="tickets">
+                <div class="1xadult"><span id="amount" class="operator-title">Issued on</span> </div>
+                <div class="45rs">
+                    <span class="multi-price">
+                        <div class="date"><span id="date1"></span> <span id="month1"></span> <span id="year1"></span>,
+                            <span id="hours-str">06</span>:<span id="booked-minutes">51</span> <span id="ampm">AM</span>
+                        </div>
+                        <span>
+
+                </div>
+            </div>
+            <div class="tickets">
+                <div class="1xadult"><span id="amount" class="operator-title">Order ID</span> </div>
+                <div class="45rs">
+                    <span class="multi-price">
+                        24205599661
+                        <span>
+
+                </div>
+            </div>
+            <div class="tickets">
+                <div class="1xadult"><span id="amount" class="operator-title">Order Item ID</span> </div>
+                <div class="45rs">
+                    <span class="multi-price">
+                        24954209981
+                        <span>
+
+                </div>
+            </div>
+            <div class="tickets">
+                <div class="1xadult"><span id="amount" class="operator-title">Ticket Type</span> </div>
+                <div class="45rs">
+                    <span class="multi-price">
+                        1 Adult
+                        <span>
+
+                </div>
+            </div>
+            <div class="tickets">
+                <div class="1xadult"><span id="amount" class="operator-title">Bus Service type</span> </div>
+                <div class="45rs">
+                    <span class="multi-price">
+                        Local
+                        <span>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+            // Logic to read from Session
+            const storedTime = localStorage.getItem('purchaseTime');
+            let purchaseDate;
+
+            if (storedTime) {
+                purchaseDate = new Date(storedTime);
+            } else {
+                purchaseDate = new Date(); // Fallback
+            }
+
+            // 1. Valid Till (Ends at 11:59 PM of same day)
+            const date = purchaseDate.getDate();
+            const month = purchaseDate.getMonth();
+            const year = purchaseDate.getFullYear();
+
+            document.getElementById("date").innerHTML = String(date).padStart(2, '0');
+            document.getElementById("month").innerHTML = months[month];
+            document.getElementById("year").innerHTML = year;
+
+            // 2. Issued On (Exact Purchase Time)
+            document.getElementById("date1").innerHTML = String(date).padStart(2, '0');
+            document.getElementById("month1").innerHTML = months[month];
+            document.getElementById("year1").innerHTML = year;
+
+            let hours = purchaseDate.getHours();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            const minutes = String(purchaseDate.getMinutes()).padStart(2, '0');
+
+            document.getElementById("hours-str").innerHTML = String(hours).padStart(2, '0');
+            document.getElementById("booked-minutes").innerHTML = minutes;
+            document.getElementById("ampm").innerHTML = ampm;
+        });
+    </script>
+</body>
+
+</html>

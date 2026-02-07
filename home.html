@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Paytm</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="shortcut icon" type="image/x-icon" href="./assets/icon.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body style="background: #f5f7fa; padding-bottom: 120px;">
+
+    <!-- Top Header -->
+    <div class="home-header" style="justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <div class="profile-icon">
+                <img src="./assets/1.png">
+            </div>
+            <!-- Gold Banner -->
+            <div
+                style="background: #fff; border-radius: 20px; padding: 4px 10px; display: flex; align-items: center; gap: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-size: 10px; font-weight: 600;">
+                <span style="color: #bfa858;">●</span> <span>Earn gold coins,<br>on every payment</span> <span
+                    style="color: #bfa858;">❯</span>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <img src="./assets/search.svg" class="icon-sm">
+            <img src="./assets/bell.svg" class="icon-sm">
+        </div>
+    </div>
+
+    <!-- UPI Money Transfer Section -->
+    <div style="padding: 15px;">
+        <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 20px; color: #000;">UPI Money Transfer</h2>
+        <div class="icon-grid" style="grid-template-columns: repeat(4, 1fr); gap: 10px;">
+            <div class="grid-item">
+                <div class="upi-circle-icon">
+                    <img src="./assets/scan-qr-w.svg">
+                </div>
+                <span>Scan<br>& Pay</span>
+            </div>
+            <div class="grid-item">
+                <div class="upi-circle-icon">
+                    <img src="./assets/to-mobile.svg">
+                </div>
+                <span>To Mobile /<br>Contact</span>
+            </div>
+            <div class="grid-item">
+                <div class="upi-circle-icon">
+                    <img src="./assets/to-bank.svg">
+                </div>
+                <span>To Bank &<br>Self A/c</span>
+            </div>
+            <div class="grid-item">
+                <div class="upi-circle-icon">
+                    <img src="./assets/balance.svg">
+                </div>
+                <span>Balance &<br>History</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recharge & Bills Card -->
+    <div class="section-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3 class="section-title" style="margin: 0;">Recharge & Bills</h3>
+            <span style="color: #00baf2; font-size: 12px; font-weight: 700;">View More</span>
+        </div>
+
+        <div class="icon-grid">
+            <div class="grid-item">
+                <img src="./assets/mobile-recharge.svg" class="grid-icon">
+                <span>Mobile<br>Recharge</span>
+            </div>
+            <div class="grid-item">
+                <img src="./assets/fastag.svg" class="grid-icon">
+                <span>FASTag<br>Recharge</span>
+            </div>
+            <div class="grid-item">
+                <img src="./assets/electricity.svg" class="grid-icon">
+                <span>Electricity<br>Bill</span>
+            </div>
+            <div class="grid-item">
+                <img src="./assets/emi.svg" class="grid-icon">
+                <span>Loan EMI<br>Payment</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Exclusive Offer Banner -->
+    <div
+        style="margin: 10px 15px; background: #e0f7fa; border-radius: 12px; padding: 15px; display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <img src="./assets/gift.svg" style="width: 40px;">
+            <div>
+                <div style="font-size: 16px; font-weight: 700; color: #002e6e;">Exclusive offer for You!</div>
+                <div style="font-size: 13px; color: #444; margin-top: 2px;">Claim your cashback now</div>
+            </div>
+        </div>
+        <div style="font-size: 18px; color: #444;">›</div>
+    </div>
+
+    <!-- Bottom Actions Row -->
+    <div style="display: flex; gap: 10px; padding: 0 15px; margin-top: 15px; overflow-x: auto; scrollbar-width: none;">
+        <div class="pill-badge">
+            <img src="./assets/receive-money.svg"> <span>Receive Money</span>
+        </div>
+        <div class="pill-badge">
+            <img src="./assets/upi-lite.svg"> <span>UPI Lite: <strong>Activate</strong></span>
+        </div>
+    </div>
+
+    <!-- Ads / Bus Ticket Banner -->
+    <div class="ad-banner" style="margin-top: 25px;" onclick="window.location.href='city_select.html'">
+        <div class="ad-content">
+            <div class="ad-logo-row">
+                <img src="./assets/paytm_white.png" height="12">
+                <span>Bus Tickets</span>
+            </div>
+            <h2 class="ad-heading">The Road to Sangam Awaits<br><span class="highlight">Flat 25% off</span></h2>
+            <button class="ad-cta">Book Bus Tickets <span>→</span></button>
+        </div>
+        <img src="./assets/kumbh_bg.png" class="ad-bg-img">
+    </div>
+
+    <!-- Scan QR (Floating) -->
+    <div class="floating-scan-btn">
+        <img src="./assets/scan-qr-p.svg">
+        <span>Scan QR</span>
+    </div>
+
+    <!-- Bottom Navigation Mock (Optional, to cut off) -->
+    <div style="height: 50px;"></div>
+
+</body>
+
+</html>
